@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Calculadora de Punto de Equilibrio — Nicolás Manú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A0A16;
+    --navy2: #151A33;
+    --azul: #64CEFB;
+    --hueso: #F4F6FA;
+    --texto-sec: rgba(244,246,250,0.6);
+    --borde: rgba(244,246,250,0.12);
+  }
+
+  body {
+    background: var(--navy);
+    color: var(--hueso);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .container { padding: 28px 20px 48px; max-width: 480px; margin: 0 auto; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--texto-sec);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .back-link:hover { color: var(--azul); }
+
+  /* HEADER */
+  .header { position: relative; overflow: hidden; padding-bottom: 8px; }
+  .header::before {
+    content: 'PE';
+    font-weight: 800;
+    font-size: 120px;
+    color: var(--azul);
+    opacity: 0.06;
+    position: absolute;
+    right: -14px;
+    top: -30px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--azul);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.15;
+    max-width: 320px;
+    letter-spacing: -0.01em;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: var(--texto-sec);
+    margin-top: 10px;
+  }
+
+  /* INPUTS */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--azul);
+    text-transform: uppercase;
+    margin: 32px 0 16px;
+    display: block;
+  }
+
+  .field {
+    margin-bottom: 14px;
+    background: var(--navy2);
+    border-radius: 14px;
+    padding: 16px 18px;
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .field:focus-within { border-color: var(--azul); }
+  .field-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; gap: 12px; }
+  .field-name { font-weight: 700; font-size: 14px; color: var(--hueso); line-height: 1.2; }
+  .field-desc { font-size: 12.5px; color: var(--texto-sec); margin-top: 4px; line-height: 1.4; }
+  .field-icon { font-size: 20px; flex-shrink: 0; opacity: 0.7; }
+  .input-wrap { display: flex; align-items: center; background: var(--navy); border-radius: 8px; overflow: hidden; }
+  .currency { font-size: 14px; color: var(--azul); padding: 10px 4px 10px 12px; font-weight: 600; flex-shrink: 0; }
+  .field input {
+    width: 100%; border: none; background: transparent;
+    font-weight: 700; font-size: 18px; color: var(--hueso);
+    padding: 9px 12px 9px 0; outline: none; -webkit-appearance: none;
+    caret-color: var(--azul); font-family: 'Inter', sans-serif;
+  }
+  .field input::placeholder { color: rgba(244,246,250,0.28); font-weight: 700; }
+
+  /* BOTÓN */
+  .btn-calcular {
+    width: 100%; background: var(--azul); color: var(--navy);
+    border: none; border-radius: 999px; padding: 17px;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
+    cursor: pointer; margin-top: 6px; transition: transform 0.15s, opacity 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-calcular:active { transform: scale(0.98); }
+  .btn-calcular:hover { opacity: 0.9; }
+
+  /* RESULTADOS */
+  .results { margin-top: 32px; display: none; animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .results.visible { display: block; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .divider { height: 1px; background: var(--borde); margin: 28px 0 24px; }
+  .results-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--azul); text-transform: uppercase; margin-bottom: 14px; display: block; }
+
+  .result-card-navy2 {
+    background: var(--navy2); border-radius: 16px; padding: 22px 20px; margin-bottom: 14px;
+    position: relative; overflow: hidden;
+  }
+  .result-card-navy2::after {
+    content: attr(data-num); font-weight: 800; font-size: 84px; color: var(--azul);
+    opacity: 0.1; position: absolute; right: -6px; bottom: -14px; line-height: 1; pointer-events: none;
+  }
+  .result-card-hueso { background: var(--hueso); border-radius: 16px; padding: 18px 20px; }
+
+  .res-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--azul); text-transform: uppercase; margin-bottom: 8px; }
+  .res-label-dark { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #5A6B8C; text-transform: uppercase; margin-bottom: 8px; }
+  .res-value { font-weight: 800; font-size: 34px; color: var(--hueso); line-height: 1; letter-spacing: -0.01em; }
+  .res-value-dark { font-weight: 800; font-size: 28px; color: var(--navy); line-height: 1; letter-spacing: -0.01em; }
+  .res-sub { font-size: 12.5px; color: var(--texto-sec); margin-top: 6px; }
+  .res-sub-dark { font-size: 12px; color: #5A6B8C; margin-top: 6px; }
+  .res-pesos { font-size: 12.5px; color: var(--texto-sec); margin-top: 12px; font-weight: 500; }
+
+  .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+  /* DIAGNÓSTICO */
+  .diag-card { background: var(--azul); border-radius: 16px; padding: 22px; margin-top: 4px; }
+  .diag-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .diag-dot { width: 7px; height: 7px; background: var(--navy); border-radius: 50%; }
+  .diag-tag { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--navy); text-transform: uppercase; opacity: 0.7; }
+  .diag-text { font-size: 14.5px; color: var(--navy); line-height: 1.6; font-weight: 500; }
+  .diag-cta {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+    color: var(--navy); font-weight: 700; font-size: 13.5px; text-decoration: none;
+    border-bottom: 1.5px solid var(--navy); padding-bottom: 2px;
+  }
+
+  .btn-reset {
+    width: 100%; background: transparent; color: var(--texto-sec);
+    border: 1.5px solid var(--borde); border-radius: 999px; padding: 14px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; margin-top: 14px; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--azul); color: var(--azul); }
+
+  /* FOOTER */
+  .footer { text-align: center; padding: 40px 20px 8px; }
+  .footer-cta {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--navy);
+    border: 1.5px solid var(--borde); color: var(--hueso); text-decoration: none;
+    border-radius: 999px; padding: 14px 24px; font-size: 14px; font-weight: 600; margin-bottom: 20px;
+  }
+  .footer-cta:hover { border-color: var(--azul); }
+  .footer-credit { font-size: 11.5px; color: var(--texto-sec); }
+  .footer-credit span { color: var(--azul); }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--hueso); color: var(--navy); padding: 14px 22px; border-radius: 12px;
+    font-size: 13.5px; font-weight: 600; max-width: 90%; text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4); transition: transform 0.3s ease; z-index: 100;
+  }
+  .toast.visible { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <a href="/" class="back-link">← Nicolás Manú</a>
+
+  <div class="header">
+    <div class="header-label">Herramientas</div>
+    <div class="header-title">Descubre el número que tu negocio necesita para empezar a ganar</div>
+    <div class="header-sub">Descúbrelo en 30 segundos.</div>
+  </div>
+
+  <span class="section-label">Tus números</span>
+
+  <div class="field">
+    <div class="field-header">
+      <div>
+        <div class="field-name">Precio de venta</div>
+        <div class="field-desc">¿A cuánto vendes cada unidad o servicio al cliente?</div>
+      </div>
+      <div class="field-icon">🏷️</div>
+    </div>
+    <div class="input-wrap">
+      <span class="currency">$</span>
+      <input type="text" id="precio" placeholder="0" inputmode="numeric" oninput="formatInput(this)">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-header">
+      <div>
+        <div class="field-name">Costo variable</div>
+        <div class="field-desc">Lo que cuesta producir o entregar cada unidad. Materiales, empaque, comisiones de venta.</div>
+      </div>
+      <div class="field-icon">⚙️</div>
+    </div>
+    <div class="input-wrap">
+      <span class="currency">$</span>
+      <input type="text" id="costoVar" placeholder="0" inputmode="numeric" oninput="formatInput(this)">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-header">
+      <div>
+        <div class="field-name">Costos fijos mensuales</div>
+        <div class="field-desc">Lo que se paga cada mes sin importar si hay ventas. Arriendo, nómina, servicios.</div>
+      </div>
+      <div class="field-icon">🏠</div>
+    </div>
+    <div class="input-wrap">
+      <span class="currency">$</span>
+      <input type="text" id="costosFijos" placeholder="0" inputmode="numeric" oninput="formatInput(this)">
+    </div>
+  </div>
+
+  <button class="btn-calcular" onclick="calcular()">
+    Calcular ahora
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  </button>
+
+  <div class="results" id="results">
+    <div class="divider"></div>
+    <span class="results-label">Tus resultados</span>
+
+    <div class="result-card-navy2" data-num="PE">
+      <div class="res-label">Punto de equilibrio</div>
+      <div class="res-value" id="peUnidades">—</div>
+      <div class="res-sub">unidades por mes para no perder ni ganar</div>
+      <div class="res-pesos" id="peVentasLabel">En pesos: —</div>
+    </div>
+
+    <div class="res-grid">
+      <div class="result-card-hueso">
+        <div class="res-label-dark">Margen de contribución</div>
+        <div class="res-value-dark" id="margenPct">—%</div>
+        <div class="res-sub-dark">de cada venta cubre costos fijos</div>
+      </div>
+      <div class="result-card-hueso">
+        <div class="res-label-dark">Contribución unitaria</div>
+        <div class="res-value-dark" id="contribucion">$—</div>
+        <div class="res-sub-dark">se gana por unidad vendida</div>
+      </div>
+    </div>
+
+    <div class="diag-card">
+      <div class="diag-header">
+        <div class="diag-dot"></div>
+        <span class="diag-tag">Diagnóstico rápido</span>
+      </div>
+      <div class="diag-text" id="diagText">—</div>
+      <a href="#" class="diag-cta" id="diagWhatsapp">Profundizar por WhatsApp →</a>
+    </div>
+
+    <button class="btn-reset" onclick="resetear()">↺ Volver a calcular</button>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="#" class="footer-cta" id="footerWhatsapp">Hablemos por WhatsApp</a>
+  <div class="footer-credit"><span>Nicolás Manú</span> · 2026</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const WHATSAPP_NUMBER = "573503462481";
+
+  function waLink(msg) {
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  }
+  document.getElementById('footerWhatsapp').href = waLink("Hola Nicolás, vi tu página y me gustaría conversar sobre tus servicios, gracias!");
+
+  function formatInput(el) {
+    let val = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
+    if (val === '') { el.value = ''; return; }
+    el.value = new Intl.NumberFormat('es-CO', { maximumFractionDigits: 0 }).format(parseInt(val));
+  }
+
+  function parseInput(id) {
+    const val = document.getElementById(id).value.replace(/\./g, '').replace(/,/g, '').trim();
+    return parseFloat(val);
+  }
+
+  function formatNum(n) {
+    return new Intl.NumberFormat('es-CO', { maximumFractionDigits: 0 }).format(n);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('visible');
+    setTimeout(() => t.classList.remove('visible'), 3200);
+  }
+
+  function diagnostico(margenPct, peUnidades, peVentas) {
+    let texto;
+    if (margenPct < 20) {
+      texto = `Con un margen de contribución de ${margenPct.toFixed(1)}%, cada venta deja poco para cubrir los costos fijos. Antes de pensar en vender más, vale la pena revisar el precio o el costo variable: con este margen, crecer en volumen no resuelve el problema de fondo.`;
+    } else if (margenPct < 40) {
+      texto = `Un margen de contribución de ${margenPct.toFixed(1)}% es funcional: se necesitan ${formatNum(Math.ceil(peUnidades))} unidades al mes solo para cubrir los costos fijos. Todo lo que se venda por encima de eso empieza a ser utilidad real.`;
+    } else {
+      texto = `Un margen de contribución de ${margenPct.toFixed(1)}% es saludable. El punto de equilibrio de ${formatNum(Math.ceil(peUnidades))} unidades debería ser alcanzable sin mucha presión, lo que deja espacio para reinvertir en crecer.`;
+    }
+    return texto;
+  }
+
+  function calcular() {
+    const precio = parseInput('precio');
+    const costoVar = parseInput('costoVar');
+    const costosFijos = parseInput('costosFijos');
+
+    if (!precio || !costoVar || !costosFijos || isNaN(precio) || isNaN(costoVar) || isNaN(costosFijos)) {
+      showToast('Completa los tres campos para calcular.');
+      return;
+    }
+    if (precio <= costoVar) {
+      showToast('El precio de venta debe ser mayor al costo variable.');
+      return;
+    }
+
+    const contribucionUnitaria = precio - costoVar;
+    const margenContribucion = (contribucionUnitaria / precio) * 100;
+    const peUnidades = costosFijos / contribucionUnitaria;
+    const peVentas = peUnidades * precio;
+
+    document.getElementById('peUnidades').textContent = formatNum(Math.ceil(peUnidades)) + ' uds';
+    document.getElementById('peVentasLabel').textContent = 'En pesos: $' + formatNum(Math.ceil(peVentas));
+    document.getElementById('margenPct').textContent = margenContribucion.toFixed(1) + '%';
+    document.getElementById('contribucion').textContent = '$' + formatNum(contribucionUnitaria);
+    document.getElementById('diagText').textContent = diagnostico(margenContribucion, peUnidades, peVentas);
+    document.getElementById('diagWhatsapp').href = waLink(`Hola Nicolás, hice el cálculo de mi punto de equilibrio (margen de ${margenContribucion.toFixed(1)}%) y quiero profundizar.`);
+
+    const results = document.getElementById('results');
+    results.classList.add('visible');
+    setTimeout(() => results.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
+  function resetear() {
+    document.getElementById('precio').value = '';
+    document.getElementById('costoVar').value = '';
+    document.getElementById('costosFijos').value = '';
+    document.getElementById('results').classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') calcular(); });
+</script>
+</body>
+</html>

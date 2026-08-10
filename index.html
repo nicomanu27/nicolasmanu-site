@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicolás Manú — Planeación y Estrategia Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @keyframes shine-sweep { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:'Inter', sans-serif; background:#0A0A16;}
+  a{color:rgba(255,255,255,0.8); text-decoration:none;}
+  a:hover{color:#ffffff;}
+
+  /* ---- HERO ---- */
+  .hero{position:relative; width:100%; height:100vh; background:#000000; overflow:hidden;}
+  .hero-video{position:absolute; top:-15%; left:0; width:100%; height:130%; object-fit:cover; z-index:0; will-change:transform;}
+  .hero-overlay{position:absolute; inset:0; background:rgba(0,0,0,0.35); z-index:1;}
+  .hero-inner{position:relative; z-index:10; display:flex; flex-direction:column; height:100%; max-width:1280px; margin:0 auto; padding:20px 24px;}
+
+  nav{display:flex; align-items:center; justify-content:space-between; padding:clamp(6px,1.5vh,16px) 0;}
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo-dot{width:28px; height:28px; border-radius:50%; border:2px solid #fff; display:flex; align-items:center; justify-content:center;}
+  .logo-dot span{width:10px; height:10px; border-radius:50%; background:#fff;}
+  .logo-text{color:#fff; font-weight:600; font-size:16px;}
+
+  .nav-pill{display:none; align-items:center; gap:24px; border:1px solid #374151; border-radius:999px; padding:10px 20px 10px 28px;}
+  .nav-pill a{font-size:14px;}
+  .nav-cta{font-size:14px; background:#fff; color:#000; border-radius:999px; padding:8px 18px; font-weight:500; transition:background 0.15s;}
+  .nav-cta:hover{background:#e5e5e5; color:#000;}
+
+  .hamburger{display:flex; background:none; border:none; padding:8px; cursor:pointer;}
+  .mobile-menu{display:none; flex-direction:column; gap:14px; padding:16px 4px 4px; border-top:1px solid #374151; margin-top:8px;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-size:14px;}
+  .mobile-menu .nav-cta{align-self:flex-start; color:#fff; background:none; padding:0; font-weight:500;}
+
+  .top-cols{display:flex; flex-direction:column; gap:clamp(4px,1vh,8px); margin-top:clamp(4px,1.5vh,12px);}
+  .top-cols p{color:rgba(255,255,255,0.8); font-size:14px; line-height:1.5; margin:0;}
+  .top-cols .left{max-width:480px;}
+
+  .hero-center{flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:clamp(6px,1.6vh,24px); overflow:hidden;}
+  .eyebrow{color:rgba(255,255,255,0.8); font-size:12px; text-transform:uppercase; letter-spacing:-0.01em; margin:0;}
+  h1{margin:0; line-height:0.85; letter-spacing:-0.04em; font-size:clamp(34px,7.5vh,128px);}
+  h1 span{display:block;}
+  .line1{color:#ffffff; font-weight:500;}
+  .line2{
+    font-weight:700;
+    background:linear-gradient(100deg,#64CEFB 0%,#64CEFB 40%,#ffffff 50%,#64CEFB 60%,#64CEFB 100%);
+    background-size:200% 100%; -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent; animation:shine-sweep 3s linear infinite;
+  }
+
+  .cta-hero{
+    display:flex; align-items:center; gap:10px; background:#64CEFB; color:#0A0A16;
+    border:none; border-radius:999px; padding:clamp(8px,1.6vh,12px) 24px; font-size:14px; font-weight:600;
+    transition:background 0.2s;
+  }
+  .cta-hero:hover{background:#4FBEEF; color:#0A0A16;}
+  .cta-hero svg{transition:transform 0.2s;}
+  .cta-hero:hover svg{transform:translateX(4px);}
+
+  @media (min-width:768px){
+    .eyebrow{font-size:14px !important;}
+    .cta-hero{padding:clamp(12px,2vh,16px) 32px !important;}
+  }
+  @media (max-height:620px){ .top-cols{display:none !important;} }
+  @media (min-width:1024px){
+    .nav-pill{display:flex !important;}
+    .hamburger{display:none !important;}
+    .top-cols{flex-direction:row !important; justify-content:space-between !important; align-items:flex-start !important;}
+    .top-cols .right{text-align:right;}
+    .top-cols p{font-size:16px !important;}
+  }
+
+  /* ---- SECCIONES ---- */
+  section{font-family:'Inter', sans-serif;}
+  .section-inner{max-width:900px; margin:0 auto;}
+  .section-inner.wide{max-width:1120px;}
+  .eyebrow-section{color:#64CEFB; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin:0; font-weight:600;}
+  h2{color:#ffffff; font-size:clamp(28px,4vw,44px); font-weight:600; letter-spacing:-0.02em; line-height:1.1; margin:0;}
+  .section-body{color:rgba(255,255,255,0.8); font-size:16px; line-height:1.7; margin:0; max-width:720px;}
+
+  #sobre-mi{background:#151A33; padding:96px 24px;}
+  #sobre-mi .section-inner{display:flex; flex-direction:column; gap:20px;}
+  .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .badge{border:1px solid #374151; border-radius:999px; padding:6px 14px; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.7);}
+
+  #como-trabajamos{background:#0A0A16; padding:96px 24px;}
+  #como-trabajamos .section-inner{display:flex; flex-direction:column; gap:20px;}
+  .path-grid{position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:32px;}
+  .path-card{position:relative; z-index:1; background:#151A33; border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px;}
+  .path-dot{width:12px; height:12px; border-radius:50%; background:#64CEFB; margin-bottom:18px;}
+  .path-tag{border:1px solid #374151; border-radius:999px; padding:5px 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.7);}
+  .path-card h3{color:#fff; font-size:20px; font-weight:600; margin:16px 0 8px;}
+  .path-card p{color:rgba(255,255,255,0.75); font-size:15px; line-height:1.6; margin:0;}
+  .aparte{margin-top:28px; background:transparent; border:1px dashed rgba(255,255,255,0.25); border-radius:20px; padding:28px; max-width:420px;}
+  .cierre{color:rgba(255,255,255,0.6); font-size:14px; margin:24px 0 0;}
+  @media (max-width:767px){ .path-grid{grid-template-columns:1fr !important;} .path-card{border-left:2px solid #64CEFB !important;} }
+
+  #herramientas{background:#151A33; padding:96px 24px;}
+  #herramientas .section-inner{display:flex; flex-direction:column; gap:20px;}
+  .tools-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:16px;}
+  .tool-card{background:#0A0A16; border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:12px;}
+  .tool-card h3{color:#fff; font-size:20px; font-weight:600; margin:0;}
+  .tool-card p{color:rgba(255,255,255,0.75); font-size:15px; line-height:1.6; margin:0; flex:1;}
+  .tool-link{color:#64CEFB; font-size:14px; font-weight:500; display:flex; align-items:center; gap:6px; transition:color 0.15s;}
+  .tool-link:hover{color:#ffffff;}
+  .tool-ghost{background:transparent; border:1px dashed rgba(255,255,255,0.25); opacity:0.7;}
+  @media (max-width:767px){ .tools-grid{grid-template-columns:1fr !important;} }
+
+  footer{background:#0A0A16; padding:64px 24px; border-top:1px solid rgba(255,255,255,0.08);}
+  .footer-wrap{max-width:1120px; margin:0 auto; display:flex; flex-direction:column; gap:32px;}
+  .footer-top{display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .footer-cta{display:flex; align-items:center; gap:10px; background:#fff; color:#000; border-radius:999px; padding:14px 28px; font-size:14px; font-weight:500; transition:background 0.15s;}
+  .footer-cta:hover{background:#e5e5e5; color:#000;}
+  .footer-social{display:flex; gap:20px;}
+  .footer-social a{font-size:14px;}
+  .credit{color:rgba(255,255,255,0.5); font-size:13px; margin:0;}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <video class="hero-video" id="heroVideo" autoplay loop muted playsinline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_105406_16f4600d-7a92-4292-b96e-b19156c7830a.mp4"></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <nav>
+      <div class="logo">
+        <div class="logo-dot"><span></span></div>
+        <span class="logo-text">Nicolás Manú</span>
+      </div>
+      <div class="nav-pill">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#como-trabajamos">Servicios</a>
+        <a href="#herramientas">Herramientas</a>
+        <a href="#" class="nav-cta" id="wa-nav">Hablemos</a>
+      </div>
+      <button class="hamburger" id="menuBtn" aria-label="Menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#como-trabajamos">Servicios</a>
+      <a href="#herramientas">Herramientas</a>
+      <a href="#" class="nav-cta" id="wa-nav-mobile">Hablemos</a>
+    </div>
+
+    <div class="top-cols">
+      <p class="left">He acompañado a empresas en etapas de crecimiento, empresas maduras en diferentes países, y acompañado procesos de inversión, además de operar mi propio negocio. Hoy ayudo a otros dueños de negocio a hacer el camino de crecer y emprender con mayor claridad y tranquilidad.</p>
+      <p class="right">FP&amp;A + AI + Experiencia real dirigiendo negocio.</p>
+    </div>
+
+    <div class="hero-center">
+      <p class="eyebrow">Planeación y estrategia financiera</p>
+      <h1>
+        <span class="line1">Claridad financiera</span>
+        <span class="line2">para crecer con control.</span>
+      </h1>
+      <a href="#" class="cta-hero" id="wa-hero">
+        Hablemos por WhatsApp
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="sobre-mi">
+  <div class="section-inner">
+    <p class="eyebrow-section">Sobre mí</p>
+    <h2>Experiencia real, en distintos terrenos.</h2>
+    <p class="section-body">Los últimos 5 años los pasé moviéndome entre startups, corporaciones de inversión y empresas multinacionales, viendo de cerca cómo se manejan las finanzas en etapas y contextos muy distintos. En paralelo, dirijo mi propio negocio. Esa mezcla es la que hoy pongo al servicio de otros dueños de negocio.</p>
+    <div class="badges">
+      <span class="badge">Startups</span>
+      <span class="badge">Corporaciones de inversión</span>
+      <span class="badge">Multinacionales</span>
+    </div>
+  </div>
+</section>
+
+<section id="como-trabajamos">
+  <div class="section-inner wide">
+    <p class="eyebrow-section">Cómo trabajamos</p>
+    <h2>Un camino, no una lista de servicios.</h2>
+    <p class="section-body">No vendemos paquetes cerrados. Empezamos donde tu negocio esté hoy y avanzamos según lo que realmente necesite.</p>
+
+    <div class="path-grid">
+      <div class="path-card">
+        <div class="path-dot"></div>
+        <span class="path-tag">Diagnóstico</span>
+        <h3>Punto de partida</h3>
+        <p>Un rayos X completo de la salud financiera de tu negocio: dónde estás parado hoy y qué te está costando plata sin que lo veas.</p>
+      </div>
+      <div class="path-card">
+        <div class="path-dot"></div>
+        <span class="path-tag">Proyecto enfocado</span>
+        <h3>Ruta</h3>
+        <p>Dos o tres meses trabajando un dolor puntual: flujo de caja, rentabilidad, o la planeación que te está haciendo falta.</p>
+      </div>
+      <div class="path-card">
+        <div class="path-dot"></div>
+        <span class="path-tag">Acompañamiento continuo</span>
+        <h3>Copiloto</h3>
+        <p>Compañía mensual y permanente, como tener a alguien de finanzas en el equipo sin contratar a alguien de planta.</p>
+      </div>
+    </div>
+
+    <div class="aparte">
+      <span class="path-tag">Sesión puntual</span>
+      <h3>Asesoría Particular</h3>
+      <p>¿Solo necesitas resolver una duda concreta? Una hora de conversación directa, sin compromiso de continuidad.</p>
+    </div>
+
+    <p class="cierre">Sin letra chiquita ni paquetes genéricos. Cotización personalizada por WhatsApp.</p>
+  </div>
+</section>
+
+<section id="herramientas">
+  <div class="section-inner wide">
+    <p class="eyebrow-section">Herramientas</p>
+    <h2>Valida tu negocio con datos, no con corazonadas.</h2>
+    <p class="section-body">Herramientas gratuitas que vamos armando para que puedas revisar tus números tú mismo, incluso antes de hablar con nosotros.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h3>Calculadora de Punto de Equilibrio</h3>
+        <p>Cuánto necesitas vender este mes para no perder plata.</p>
+        <a href="/herramientas/punto-de-equilibrio/" class="tool-link">Ir a la calculadora
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="tool-card tool-ghost">
+        <h3>Próximamente</h3>
+        <p>Seguimos construyendo más herramientas. Esta sección se va a ir llenando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="footer-wrap">
+    <div class="footer-top">
+      <a href="#" class="footer-cta" id="wa-footer">
+        Hablemos por WhatsApp
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/nico.nomics/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@nico.nomics_" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <p class="credit">Nicolás Manú - 2026</p>
+  </div>
+</footer>
+
+<script>
+  // WhatsApp
+  const WHATSAPP_NUMBER = "573503462481";
+  const WHATSAPP_MSG = "Hola Nicolás, vi tu página y me gustaría conversar sobre tus servicios, gracias!";
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MSG)}`;
+  ["wa-nav", "wa-nav-mobile", "wa-hero", "wa-footer"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.href = waLink;
+  });
+
+  // Menú mobile
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+
+  // Video: autoplay + parallax al scroll
+  const video = document.getElementById('heroVideo');
+  video.muted = true;
+  video.play().catch(() => {});
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      video.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+      ticking = false;
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
