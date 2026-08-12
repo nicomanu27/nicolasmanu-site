@@ -97,9 +97,10 @@
   .path-tag{border:1px solid #374151; border-radius:999px; padding:5px 12px; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:rgba(255,255,255,0.7);}
   .path-card h3{color:#fff; font-size:20px; font-weight:600; margin:16px 0 8px;}
   .path-card p{color:rgba(255,255,255,0.75); font-size:15px; line-height:1.6; margin:0;}
-  .aparte{margin-top:28px; background:transparent; border:1px dashed rgba(255,255,255,0.25); border-radius:20px; padding:28px; max-width:420px;}
-  .aparte h3{color:#fff; font-size:20px; font-weight:600; margin:16px 0 8px;}
-  .aparte p{color:rgba(255,255,255,0.75); font-size:15px; line-height:1.6; margin:0;}
+  .aparte-row{margin-top:28px; display:flex; gap:20px; flex-wrap:wrap;}
+  .aparte-card{background:transparent; border:1px dashed rgba(255,255,255,0.25); border-radius:20px; padding:28px; flex:1; min-width:260px;}
+  .aparte-card h3{color:#fff; font-size:20px; font-weight:600; margin:16px 0 8px;}
+  .aparte-card p{color:rgba(255,255,255,0.75); font-size:15px; line-height:1.6; margin:0;}
   .cierre{color:rgba(255,255,255,0.6); font-size:14px; margin:24px 0 0;}
   @media (max-width:767px){ .path-grid{grid-template-columns:1fr !important;} .path-card{border-left:2px solid #64CEFB !important;} }
 
@@ -211,10 +212,17 @@
       </div>
     </div>
 
-    <div class="aparte">
-      <span class="path-tag">Sesión puntual</span>
-      <h3>Asesoría Particular</h3>
-      <p>¿Solo necesitas resolver una duda concreta? Una hora de conversación directa, sin compromiso de continuidad.</p>
+    <div class="aparte-row">
+      <div class="aparte-card">
+        <span class="path-tag">Sesión puntual</span>
+        <h3>Asesoría Particular</h3>
+        <p>¿Solo necesitas resolver una duda concreta? Una hora de conversación directa, sin compromiso de continuidad.</p>
+      </div>
+      <div class="aparte-card">
+        <span class="path-tag">Automatización</span>
+        <h3>Optimización con IA</h3>
+        <p>Automatizaciones y herramientas de IA para los procesos que se repiten cada semana en tu negocio.</p>
+      </div>
     </div>
 
     <p class="cierre">Sin letra chiquita ni paquetes genéricos. Cotización personalizada por WhatsApp.</p>
