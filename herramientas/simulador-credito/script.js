@@ -44,7 +44,7 @@ const WHATSAPP_NUMBER = "573503462481";
     } else if (cobertura < 1.5) {
       return `El flujo de caja cubre la cuota, pero el margen es ajustado: quedan $${formatNum(margen)} libres cada mes después de pagarla. Cualquier mes flojo puede complicar las cosas.`;
     } else {
-      return `El flujo de caja cubre la cuota con margen saludable: quedan $${formatNum(margen)} libres cada mes después de pagarla.`;
+      return `El flujo de caja cubre la cuota con margen saludable: quedan $${formatNum(margen)} libres cada mes después de pagarla. Vale la pena ver si conviene usar ese margen para crecer más rápido, o si hay una mejor estructura de financiamiento disponible.`;
     }
   }
 
