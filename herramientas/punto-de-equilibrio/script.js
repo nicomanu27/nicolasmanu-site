@@ -79,3 +79,10 @@ const WHATSAPP_NUMBER = "573503462481";
   }
 
   document.addEventListener('keydown', e => { if (e.key === 'Enter') calcular(); });
+
+// Listeners (movidos acá porque el CSP bloquea los atributos onclick/oninput inline)
+document.getElementById('precio').addEventListener('input', function () { formatInput(this); });
+document.getElementById('costoVar').addEventListener('input', function () { formatInput(this); });
+document.getElementById('costosFijos').addEventListener('input', function () { formatInput(this); });
+document.getElementById('btnCalcular').addEventListener('click', calcular);
+document.getElementById('btnReset').addEventListener('click', resetear);

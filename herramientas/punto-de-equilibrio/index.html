@@ -33,7 +33,7 @@
     </div>
     <div class="input-wrap">
       <span class="currency">$</span>
-      <input type="text" id="precio" placeholder="0" inputmode="numeric" oninput="formatInput(this)">
+      <input type="text" id="precio" placeholder="0" inputmode="numeric">
     </div>
   </div>
 
@@ -47,7 +47,7 @@
     </div>
     <div class="input-wrap">
       <span class="currency">$</span>
-      <input type="text" id="costoVar" placeholder="0" inputmode="numeric" oninput="formatInput(this)">
+      <input type="text" id="costoVar" placeholder="0" inputmode="numeric">
     </div>
   </div>
 
@@ -61,11 +61,11 @@
     </div>
     <div class="input-wrap">
       <span class="currency">$</span>
-      <input type="text" id="costosFijos" placeholder="0" inputmode="numeric" oninput="formatInput(this)">
+      <input type="text" id="costosFijos" placeholder="0" inputmode="numeric">
     </div>
   </div>
 
-  <button class="btn-calcular" onclick="calcular()">
+  <button class="btn-calcular" id="btnCalcular">
     Calcular ahora
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
   </button>
@@ -103,7 +103,7 @@
       <a href="#" class="diag-cta" id="diagWhatsapp">Profundizar por WhatsApp →</a>
     </div>
 
-    <button class="btn-reset" onclick="resetear()">↺ Volver a calcular</button>
+    <button class="btn-reset" id="btnReset">↺ Volver a calcular</button>
   </div>
 
 </div>

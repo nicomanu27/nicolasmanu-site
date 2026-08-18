@@ -27,14 +27,14 @@
     <div class="field-name">Monto solicitado</div>
     <div class="input-wrap">
       <span class="unit prefix">$</span>
-      <input type="text" id="monto" placeholder="0" inputmode="numeric" oninput="formatMoneda(this)">
+      <input type="text" id="monto" placeholder="0" inputmode="numeric">
     </div>
   </div>
 
   <div class="field">
     <div class="field-name">Plazo</div>
     <div class="input-wrap">
-      <input type="text" id="plazo" placeholder="0" inputmode="numeric" oninput="formatEntero(this)">
+      <input type="text" id="plazo" placeholder="0" inputmode="numeric">
       <span class="unit suffix">meses</span>
     </div>
   </div>
@@ -42,7 +42,7 @@
   <div class="field">
     <div class="field-name">Tasa de interés (E.A.)</div>
     <div class="input-wrap">
-      <input type="text" id="tasa" placeholder="0" inputmode="decimal" oninput="formatDecimal(this)">
+      <input type="text" id="tasa" placeholder="0" inputmode="decimal">
       <span class="unit suffix">%</span>
     </div>
   </div>
@@ -53,7 +53,7 @@
     <div class="field-name">Ingresos mensuales</div>
     <div class="input-wrap">
       <span class="unit prefix">$</span>
-      <input type="text" id="ingresos" placeholder="0" inputmode="numeric" oninput="formatMoneda(this)">
+      <input type="text" id="ingresos" placeholder="0" inputmode="numeric">
     </div>
   </div>
 
@@ -61,11 +61,11 @@
     <div class="field-name">Salidas de caja mensuales</div>
     <div class="input-wrap">
       <span class="unit prefix">$</span>
-      <input type="text" id="salidas" placeholder="0" inputmode="numeric" oninput="formatMoneda(this)">
+      <input type="text" id="salidas" placeholder="0" inputmode="numeric">
     </div>
   </div>
 
-  <button class="btn-calcular" onclick="calcular()">
+  <button class="btn-calcular" id="btnCalcular">
     Calcular ahora
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
   </button>
@@ -105,7 +105,7 @@
     <div class="amort-box">
       <span class="res-label">Tabla de amortización</span>
       <div class="amort-summary" id="amortResumen"></div>
-      <button class="btn-toggle-tabla" id="btnToggleTabla" onclick="toggleTabla()">Ver tabla completa ↓</button>
+      <button class="btn-toggle-tabla" id="btnToggleTabla">Ver tabla completa ↓</button>
       <div class="tabla-wrap" id="tablaWrap">
         <table class="amort">
           <thead>
@@ -125,7 +125,7 @@
       <a href="#" class="diag-cta" id="diagWhatsapp">Profundizar por WhatsApp →</a>
     </div>
 
-    <button class="btn-reset" onclick="resetear()">↺ Volver a calcular</button>
+    <button class="btn-reset" id="btnReset">↺ Volver a calcular</button>
   </div>
 
 </div>

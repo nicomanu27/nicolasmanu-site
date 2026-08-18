@@ -125,3 +125,13 @@ const WHATSAPP_NUMBER = "573503462481";
   }
 
   document.addEventListener('keydown', e => { if (e.key === 'Enter') calcular(); });
+
+// Listeners (movidos acá porque el CSP bloquea los atributos onclick/oninput inline)
+document.getElementById('monto').addEventListener('input', function () { formatMoneda(this); });
+document.getElementById('plazo').addEventListener('input', function () { formatEntero(this); });
+document.getElementById('tasa').addEventListener('input', function () { formatDecimal(this); });
+document.getElementById('ingresos').addEventListener('input', function () { formatMoneda(this); });
+document.getElementById('salidas').addEventListener('input', function () { formatMoneda(this); });
+document.getElementById('btnCalcular').addEventListener('click', calcular);
+document.getElementById('btnToggleTabla').addEventListener('click', toggleTabla);
+document.getElementById('btnReset').addEventListener('click', resetear);
