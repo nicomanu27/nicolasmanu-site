@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Simulador de Crédito — Nicolás Manú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <a href="/" class="back-link">← Nicolás Manú</a>
+
+  <div class="header">
+    <div class="header-label">Herramientas</div>
+    <div class="header-title">Antes de firmar un crédito, mira si tu flujo de caja lo aguanta</div>
+    <div class="header-sub">Cuota, tabla de amortización y capacidad de pago, en un minuto.</div>
+  </div>
+
+  <span class="section-label">Tu crédito</span>
+
+  <div class="field">
+    <div class="field-name">Monto solicitado</div>
+    <div class="input-wrap">
+      <span class="unit prefix">$</span>
+      <input type="text" id="monto" placeholder="0" inputmode="numeric" oninput="formatMoneda(this)">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-name">Plazo</div>
+    <div class="input-wrap">
+      <input type="text" id="plazo" placeholder="0" inputmode="numeric" oninput="formatEntero(this)">
+      <span class="unit suffix">meses</span>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-name">Tasa de interés (E.A.)</div>
+    <div class="input-wrap">
+      <input type="text" id="tasa" placeholder="0" inputmode="decimal" oninput="formatDecimal(this)">
+      <span class="unit suffix">%</span>
+    </div>
+  </div>
+
+  <span class="section-label">Tu flujo de caja</span>
+
+  <div class="field">
+    <div class="field-name">Ingresos mensuales</div>
+    <div class="input-wrap">
+      <span class="unit prefix">$</span>
+      <input type="text" id="ingresos" placeholder="0" inputmode="numeric" oninput="formatMoneda(this)">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-name">Salidas de caja mensuales</div>
+    <div class="input-wrap">
+      <span class="unit prefix">$</span>
+      <input type="text" id="salidas" placeholder="0" inputmode="numeric" oninput="formatMoneda(this)">
+    </div>
+  </div>
+
+  <button class="btn-calcular" onclick="calcular()">
+    Calcular ahora
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  </button>
+
+  <div class="results" id="results">
+    <div class="divider"></div>
+    <span class="results-label">Tu crédito</span>
+
+    <div class="result-card-navy2" data-num="$">
+      <div class="res-label">Cuota mensual</div>
+      <div class="res-value" id="cuota">—</div>
+      <div class="res-sub" id="tasaMensualLabel">Tasa mensual equivalente: —</div>
+    </div>
+
+    <div class="res-grid">
+      <div class="result-card-hueso">
+        <div class="res-label-dark">Total a pagar</div>
+        <div class="res-value-dark" id="totalPagar">$—</div>
+      </div>
+      <div class="result-card-hueso">
+        <div class="res-label-dark">Total intereses</div>
+        <div class="res-value-dark" id="totalIntereses">$—</div>
+      </div>
+    </div>
+
+    <div class="res-grid">
+      <div class="result-card-hueso">
+        <div class="res-label-dark">Saldo disponible / mes</div>
+        <div class="res-value-dark" id="saldoDisponible">$—</div>
+      </div>
+      <div class="result-card-hueso">
+        <div class="res-label-dark">Veces que cubre la cuota</div>
+        <div class="res-value-dark" id="cobertura">—x</div>
+      </div>
+    </div>
+
+    <div class="amort-box">
+      <span class="res-label">Tabla de amortización</span>
+      <div class="amort-summary" id="amortResumen"></div>
+      <button class="btn-toggle-tabla" id="btnToggleTabla" onclick="toggleTabla()">Ver tabla completa ↓</button>
+      <div class="tabla-wrap" id="tablaWrap">
+        <table class="amort">
+          <thead>
+            <tr><th>Mes</th><th>Cuota</th><th>Interés</th><th>Abono</th><th>Saldo</th></tr>
+          </thead>
+          <tbody id="amortBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="diag-card">
+      <div class="diag-header">
+        <div class="diag-dot"></div>
+        <span class="diag-tag">Diagnóstico rápido</span>
+      </div>
+      <div class="diag-text" id="diagText">—</div>
+      <a href="#" class="diag-cta" id="diagWhatsapp">Profundizar por WhatsApp →</a>
+    </div>
+
+    <button class="btn-reset" onclick="resetear()">↺ Volver a calcular</button>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="#" class="footer-cta" id="footerWhatsapp">Hablemos por WhatsApp</a>
+  <div class="footer-credit"><span>Nicolás Manú</span> · 2026</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
