@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Costeo — Nicolás Manú</title>
+<meta name="description" content="Descubre cuánto te cuesta realmente cada plato y cuáles te dejan plata. Gratis y en menos de 5 minutos.">
+<meta property="og:title" content="Calculadora de Costeo — Nicolás Manú">
+<meta property="og:description" content="Descubre cuánto te cuesta realmente cada plato y cuáles te dejan plata.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+
+  <a href="/" class="back-link">← Nicolás Manú</a>
+
+  <div class="header">
+    <div class="header-label">Herramientas</div>
+    <h1 class="header-title">Descubre cuánto te cuesta realmente cada plato</h1>
+    <p class="header-sub">Y cuáles te dejan plata, en menos de 5 minutos. Tus datos se quedan en tu navegador.</p>
+  </div>
+
+  <div class="demo-banner" id="demoBanner" hidden>
+    <p class="demo-text"><b>Este es un plato de ejemplo</b> para que veas cómo funciona. Cámbialo, o bórralo y empieza con el tuyo.</p>
+    <button type="button" class="btn-ghost" id="btnBorrarDemo">Borrar ejemplo y empezar desde cero</button>
+  </div>
+
+  <span class="section-label">Tus platos</span>
+  <div class="chips" id="chips"></div>
+
+  <div class="field">
+    <label class="field-name" for="fNombre">Nombre del plato</label>
+    <div class="input-wrap">
+      <input type="text" id="fNombre" data-field="nombre" maxlength="40" placeholder="Ej. Bandeja paisa" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="field">
+      <label class="field-name" for="fPorciones">Porciones que rinde la receta</label>
+      <div class="input-wrap">
+        <input type="text" id="fPorciones" data-field="porciones" data-kind="int" inputmode="numeric" placeholder="Ej. 4" autocomplete="off">
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-name" for="fPrecio">Precio de venta en carta</label>
+      <div class="input-wrap">
+        <span class="unit prefix">$</span>
+        <input type="text" id="fPrecio" data-field="precio" data-kind="money" inputmode="numeric" placeholder="0" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <span class="section-label">Ingredientes de la receta</span>
+  <p class="hint">Cantidad usada es lo que llega al plato. La merma es lo que pierdes antes de cocinar: al pelar, limpiar o porcionar.</p>
+  <div id="ingList"></div>
+  <button type="button" class="btn-add" id="btnAddIng">+ Agregar ingrediente</button>
+
+  <span class="section-label">Opciones del plato</span>
+
+  <label class="switch">
+    <span class="switch-text">
+      <b>Mi precio incluye impoconsumo (8%)</b>
+      <small>Calculamos sobre el precio sin impuesto, que es lo que realmente te queda.</small>
+    </span>
+    <input type="checkbox" id="fImpo" data-field="impo">
+    <span class="track"></span>
+  </label>
+
+  <div class="grid-2">
+    <div class="field">
+      <label class="field-name" for="fComision">Comisión de la app de domicilios (opcional)</label>
+      <div class="input-wrap">
+        <input type="text" id="fComision" data-field="comision" data-kind="pct" inputmode="decimal" placeholder="Ej. 25" autocomplete="off">
+        <span class="unit suffix">%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-name" for="fObjetivo">Food cost objetivo</label>
+      <div class="input-wrap">
+        <input type="text" id="fObjetivo" data-field="objetivo" data-kind="pct" inputmode="decimal" placeholder="30" autocomplete="off">
+        <span class="unit suffix">%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="danger-row">
+    <button type="button" class="btn-link" id="btnEliminar">Eliminar este plato</button>
+  </div>
+
+  <span class="section-label">Resultados de este plato</span>
+  <div id="resultados"></div>
+
+  <span class="section-label">Compara todos tus platos</span>
+  <div id="comparacion"></div>
+
+  <div class="cta-block">
+    <h2 class="cta-title">¿Quieres que revisemos juntos el margen de tus platos?</h2>
+    <p class="cta-text">Cuéntame cómo te salieron los números y vemos dónde está la plata que se te está yendo.</p>
+    <a href="#" class="btn-wa" id="ctaWhatsapp">
+      Hablemos por WhatsApp
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="/#herramientas" class="footer-cta">Ver más herramientas</a>
+  <div class="footer-credit"><span>Nicolás Manú</span> · 2026</div>
+</div>
+
+</body>
+</html>
