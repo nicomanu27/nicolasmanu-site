@@ -57,9 +57,9 @@ body {
   padding: 14px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: border-color 0.2s;
 }
 .btn-add:hover { border-color: var(--azul); }
-.btn-link { background: none; border: none; color: var(--texto-sec); font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 6px 0; }
-.btn-link:hover { color: var(--rojo); }
-.danger-row { margin-top: 14px; text-align: right; }
+.btn-link { background: transparent; border: 1.5px solid rgba(248,113,113,0.5); color: var(--rojo); font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 9px 16px; border-radius: 999px; }
+.btn-link:hover { border-color: var(--rojo); }
+.danger-row { margin: 0 0 18px; text-align: right; }
 .confirm-del { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .confirm-text { font-size: 13px; font-weight: 600; color: var(--hueso); margin-right: 4px; }
 .btn-danger { background: var(--rojo); border: none; color: var(--navy); border-radius: 999px; padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; cursor: pointer; }
