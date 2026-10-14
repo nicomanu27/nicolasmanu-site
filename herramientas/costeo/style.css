@@ -60,6 +60,11 @@ body {
 .btn-link { background: none; border: none; color: var(--texto-sec); font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 6px 0; }
 .btn-link:hover { color: var(--rojo); }
 .danger-row { margin-top: 14px; text-align: right; }
+.confirm-del { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.confirm-text { font-size: 13px; font-weight: 600; color: var(--hueso); margin-right: 4px; }
+.btn-danger { background: var(--rojo); border: none; color: var(--navy); border-radius: 999px; padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.btn-ghost-sm { background: transparent; border: 1.5px solid var(--borde); color: var(--azul); border-radius: 999px; padding: 9px 16px; font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.btn-ghost-sm:hover { border-color: var(--azul); }
 button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
 
 /* CHIPS */

@@ -31,6 +31,11 @@
     <button type="button" class="btn-ghost" id="btnBorrarDemo">Borrar ejemplo y empezar desde cero</button>
   </div>
 
+  <div class="demo-banner" id="vacioBanner" hidden>
+    <p class="demo-text"><b>Empieza con tu primer plato.</b> Llena los datos de abajo, o mira cómo funciona con un plato de ejemplo.</p>
+    <button type="button" class="btn-ghost" id="btnCargarDemo">Ver plato de ejemplo</button>
+  </div>
+
   <span class="section-label">Tus platos</span>
   <div class="chips" id="chips"></div>
 
@@ -92,6 +97,11 @@
 
   <div class="danger-row">
     <button type="button" class="btn-link" id="btnEliminar">Eliminar este plato</button>
+    <div class="confirm-del" id="confirmDel" hidden>
+      <span class="confirm-text">¿Eliminar este plato?</span>
+      <button type="button" class="btn-danger" id="btnConfirmarEliminar">Sí, eliminar</button>
+      <button type="button" class="btn-ghost-sm" id="btnCancelarEliminar">Cancelar</button>
+    </div>
   </div>
 
   <span class="section-label">Resultados de este plato</span>

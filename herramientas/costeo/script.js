@@ -10,7 +10,6 @@
   var SEM_TEXTO = { verde: 'Verde · Saludable', amarillo: 'Amarillo · En alerta', rojo: 'Rojo · Muy alto' };
 
   var state = null;
-  var deleteTimer = null;
 
   /* ---------- utilidades ---------- */
   function $(id) { return document.getElementById(id); }
@@ -402,11 +401,13 @@
     renderComparacion();
     actualizarCostos();
     actualizarCTA();
+    renderVacioBanner();
   }
   function renderTodo() {
     guardar();
     renderChips();
     renderDemoBanner();
+    renderVacioBanner();
     llenarFormulario();
     renderIngredientes();
     renderResultados();
@@ -416,9 +417,29 @@
 
   /* ---------- acciones ---------- */
   function resetearEliminar() {
-    clearTimeout(deleteTimer);
-    deleteTimer = null;
-    $('btnEliminar').textContent = 'Eliminar este plato';
+    $('confirmDel').hidden = true;
+    $('btnEliminar').hidden = false;
+  }
+  function pedirConfirmacion() {
+    $('btnEliminar').hidden = true;
+    $('confirmDel').hidden = false;
+    $('btnConfirmarEliminar').focus();
+  }
+  function platoVacio(d) {
+    if (d.nombre || d.precio || d.porciones) return false;
+    return d.ingredientes.every(function (i) { return !i.nombre && !i.precio && !i.cantCompra && !i.cantUsada; });
+  }
+  function renderVacioBanner() {
+    var hayDemo = state.dishes.some(function (d) { return d.demo; });
+    $('vacioBanner').hidden = hayDemo || !(state.dishes.length === 1 && platoVacio(state.dishes[0]));
+  }
+  function cargarDemo() {
+    var vacio = state.dishes.length === 1 && platoVacio(state.dishes[0]);
+    var demo = crearDemo();
+    if (vacio) state.dishes = [demo]; else state.dishes.unshift(demo);
+    state.activeId = demo.id;
+    renderTodo();
+    window.scrollTo(0, 0);
   }
   function eliminarPlato() {
     var d = activo();
@@ -519,11 +540,6 @@
     state.activeId = chip.dataset.dish;
     renderTodo();
   }
-  function onEliminarClick() {
-    if (deleteTimer) { eliminarPlato(); return; }
-    $('btnEliminar').textContent = 'Toca otra vez para confirmar';
-    deleteTimer = setTimeout(resetearEliminar, 3500);
-  }
   function onComparacionClick(e) {
     var b = e.target.closest('[data-sort]');
     if (!b) return;
@@ -543,7 +559,10 @@
     $('ingList').addEventListener('click', onIngClick);
     $('chips').addEventListener('click', onChipsClick);
     $('btnAddIng').addEventListener('click', agregarIngrediente);
-    $('btnEliminar').addEventListener('click', onEliminarClick);
+    $('btnEliminar').addEventListener('click', pedirConfirmacion);
+    $('btnCancelarEliminar').addEventListener('click', resetearEliminar);
+    $('btnConfirmarEliminar').addEventListener('click', eliminarPlato);
+    $('btnCargarDemo').addEventListener('click', cargarDemo);
     $('btnBorrarDemo').addEventListener('click', borrarDemo);
     $('comparacion').addEventListener('click', onComparacionClick);
     renderTodo();
