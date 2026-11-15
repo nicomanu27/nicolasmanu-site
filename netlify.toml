@@ -1,6 +1,6 @@
 # Evita que el archivo de instrucciones internas quede publicado en el sitio.
 [[redirects]]
   from = "/CLAUDE.md"
-  to = "/"
+  to = "/404.html"
   status = 404
   force = true
