@@ -8,7 +8,7 @@ Sitio estático para Nicolás Manú: planeación y estrategia financiera para Py
 - No usar rayas largas (—) en textos publicados. En el copy del sitio se escribe en plural ("nosotros") cuando habla el negocio, y de "tú" al lector.
 - Antes de publicar cambios visibles, mostrar el resultado a Nicolás y esperar su visto bueno. Nada va a `main` sin revisión conjunta.
 - Si Nicolás pide solo una respuesta o un texto, no tocar el repo.
-- Nunca guardar ni pedir tokens de GitHub en archivos ni en el chat. La conexión se hace por el conector de GitHub de claude.ai.
+- GitHub se usa con `gh` (CLI oficial), con sesión iniciada una vez en el Mac de Nicolás y token guardado en el llavero de macOS. Claude puede hacer push de ramas, abrir PRs y leer deploy previews sin pedir permiso cada vez. Lo que nunca cambia: nada se fusiona a `main` sin el visto bueno de Nicolás, y ningún token se escribe en archivos, en el repo ni en el chat.
 
 ## Estructura
 - `index.html`: home (hero con video, Sobre mí, Cómo trabajamos, Herramientas, footer).
