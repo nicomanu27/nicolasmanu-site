@@ -6,7 +6,7 @@
   a:hover{color:#ffffff;}
 
   /* ---- HERO ---- */
-  .hero{position:relative; width:100%; height:100vh; background:#000000; overflow:hidden;}
+  .hero{position:relative; width:100%; height:100vh; height:100svh; background:#000000; overflow:hidden;}
   .hero-video{position:absolute; top:-15%; left:0; width:100%; height:130%; object-fit:cover; z-index:0; will-change:transform;}
   .hero-overlay{position:absolute; inset:0; background:rgba(0,0,0,0.35); z-index:1;}
   .hero-inner{position:relative; z-index:10; display:flex; flex-direction:column; height:100%; max-width:1280px; margin:0 auto; padding:20px 24px;}
@@ -113,3 +113,11 @@
   .footer-social{display:flex; gap:20px;}
   .footer-social a{font-size:14px;}
   .credit{color:rgba(255,255,255,0.5); font-size:13px; margin:0;}
+
+  /* ---- Movimiento reducido ---- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .line2{animation:none; background-position:0% 50%;}
+    .hero-video{will-change:auto;}
+    *,*::before,*::after{transition-duration:0.01ms !important;}
+  }
